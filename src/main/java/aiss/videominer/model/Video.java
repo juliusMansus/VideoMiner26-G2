@@ -1,10 +1,11 @@
 package aiss.videominer.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,40 +16,47 @@ import java.util.List;
 public class Video {
 
     @Id
-    @JsonProperty("id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    @JsonProperty("name")
+    @Column(name="name")
     @NotEmpty(message = "Video name cannot be empty")
     private String name;
 
-    @JsonProperty("description")
-    @Column(columnDefinition="TEXT")
+    @Column(name="description", columnDefinition="TEXT")
     private String description;
 
-    @JsonProperty("releaseTime")
+    @Column(name="releaseTime")
     @NotEmpty(message = "Video release time cannot be empty")
     private String releaseTime;
 
-    @JsonProperty("user")
     @OneToOne(cascade = CascadeType.ALL)
     private User author;
 
-    @JsonProperty("comments")
+    @Column(name="comments")
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "videoId")
     private List<Comment> comments;
 
-    @JsonProperty("captions")
+    @Column(name="captions")
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "videoId")
     private List<Caption> captions;
 
-    public String getId() {
+    public Video(String name, String description, String releaseTime, User author, List<Comment> comments, List<Caption> captions){
+        this.name=name;
+        this.description=description;
+        this.releaseTime=releaseTime;
+        this.author=new User();
+        this.comments=new ArrayList<>();
+        this.captions=new ArrayList<>();
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
