@@ -1,4 +1,4 @@
-package aisspeerTubeMiner.peerTubeMiner.model.videominer;
+package aiss.peerTubeMiner.model.videominer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,4 +1,4 @@
-package aisspeerTubeMiner.peerTubeMiner.model.peertube;
+package aiss.peerTubeMiner.model.peertube;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,5 +19,13 @@ public class Caption {
 
     public Language getLanguage() {
         return language;
+    }
+
+    public void setCaptionPath(String captionPath) {
+        this.captionPath = captionPath;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 }

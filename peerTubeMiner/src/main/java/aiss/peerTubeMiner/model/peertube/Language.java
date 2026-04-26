@@ -1,4 +1,4 @@
-package aisspeerTubeMiner.peerTubeMiner.model.peertube;
+package aiss.peerTubeMiner.model.peertube;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,4 +13,12 @@ public class Language {
 
     public String getId() { return id; }
     public String getLabel() { return label; }
+
+    @Override
+    public String toString() {
+        return "Language{" +
+                "id='" + id + '\'' +
+                ", label='" + label + '\'' +
+                '}';
+    }
 }

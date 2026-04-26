@@ -1,0 +1,27 @@
+package aiss.peerTubeMiner.service;
+
+import aiss.peerTubeMiner.model.videominer.VMCaption;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+@SpringBootTest()
+class CaptionServiceTest {
+
+    @Autowired
+    CaptionService captionService;
+
+    @Test
+    @DisplayName("GetCaptions of a video")
+    void getCaptions() {
+        List<VMCaption> captions = captionService.getCaptions("udhki4GbH2NtTx6aGJB6Mr");
+        assertFalse(captions.isEmpty(), "The Captions List is empty");
+        System.out.println(captions);
+
+    }
+}
