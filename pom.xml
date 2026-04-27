@@ -1,0 +1,11 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>aiss</groupId>
+    <artifactId>integration-project</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging> <modules>
+    <module>dailyMotionMiner</module>
+    <module>peerTubeMiner</module>
+    <module>VideoMiner</module>
+</modules>
+</project>
