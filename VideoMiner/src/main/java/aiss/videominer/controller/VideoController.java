@@ -22,6 +22,9 @@ public class VideoController {
     @GetMapping("/{id}")
     public Video findOneById(@PathVariable long id){
         Optional<Video> video=videoRepo.findById(id);
+        if (!video.isPresent()) {
+            throw new VideoNotFoundException();
+        }
         return video.get();
     }
 

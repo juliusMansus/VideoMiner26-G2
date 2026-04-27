@@ -27,6 +27,9 @@ public class ChannelController {
     @GetMapping("/{id}")
     public Channel findOne(@PathVariable long id){
         Optional<Channel> channel=channelRepo.findById(id);
+        if (!channel.isPresent()) {
+            throw new ChannelNotFoundException();
+        }
         return channel.get();
     }
 
