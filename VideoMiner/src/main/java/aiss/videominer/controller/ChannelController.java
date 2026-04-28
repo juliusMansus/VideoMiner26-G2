@@ -36,15 +36,16 @@ public class ChannelController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Channel create(@Valid @RequestBody Channel channel) {
-        return channelRepo.save(new Channel(channel.getName(), channel.getDescription(),
-                channel.getCreatedTime(), new ArrayList<>()));
-
+        return channelRepo.save(channel);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     public void update(@Valid @RequestBody Channel upChannel, @PathVariable long id){
         Optional<Channel> channelData=channelRepo.findById(id);
+        if (!channelData.isPresent()) {
+            throw new ChannelNotFoundException();
+        }
         Channel _channel=channelData.get();
         _channel.setName(upChannel.getName());
         _channel.setDescription(upChannel.getDescription());
