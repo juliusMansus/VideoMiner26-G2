@@ -37,10 +37,17 @@ public class VideoService {
 
             if (videoList != null && videoList.getData() != null) {
                 for (Video video : videoList.getData()) {
+                    if (videos.size() >= maxVideos) {
+                        break;
+                    }
                     videos.add(VideoMapper.toVMVideo(video,
                             captionService.getCaptions(video.getId())));
                 }
-                hasMore = videoList.getHasMore();
+                hasMore = videoList.getHasMore() != null && videoList.getHasMore() : false;
+                
+                if (videos.size() >= maxVideos) {
+                        break;
+                    }
             }
             else {
                 hasMore = false;
