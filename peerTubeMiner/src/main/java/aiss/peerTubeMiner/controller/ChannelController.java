@@ -47,7 +47,7 @@ public class ChannelController {
         try {
             VMChannel channel = channelService.getChannel(id, maxVideos, maxComments);
             restTemplate.postForObject(
-                    videoMinerUrl + "/api/v1/channels",
+                    videoMinerUrl + "/api/channels",
                     channel,
                     VMChannel.class);
             return channel;
