@@ -1,5 +1,6 @@
 package aiss.peerTubeMiner.controller;
 
+import aiss.peerTubeMiner.exception.ChannelNotFoundException;
 import aiss.peerTubeMiner.model.videominer.VMChannel;
 import aiss.peerTubeMiner.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,18 @@ public class ChannelController {
 
     // GET - for testing only, does not send to VideoMiner
     @GetMapping("/{id}")
-    public VMChannel getChannel(
+    public VMChannel getChannel (
             @PathVariable String id,
             @RequestParam(defaultValue = "10") int maxVideos,
-            @RequestParam(defaultValue = "2") int maxComments) {
+            @RequestParam(defaultValue = "2") int maxComments) throws ChannelNotFoundException {
 
-        return channelService.getChannel(id, maxVideos, maxComments);
+        try{
+            return channelService.getChannel(id, maxVideos, maxComments);
+        }
+        catch (Exception e){
+            throw new ChannelNotFoundException();
+        }
+
     }
 
     // POST - fetches from PeerTube and sends to VideoMiner
@@ -36,13 +43,18 @@ public class ChannelController {
     public VMChannel sendToVideoMiner(
             @PathVariable String id,
             @RequestParam(defaultValue = "10") int maxVideos,
-            @RequestParam(defaultValue = "2") int maxComments) {
+            @RequestParam(defaultValue = "2") int maxComments) throws ChannelNotFoundException {
+        try {
+            VMChannel channel = channelService.getChannel(id, maxVideos, maxComments);
+            restTemplate.postForObject(
+                    videoMinerUrl + "/api/v1/channels",
+                    channel,
+                    VMChannel.class);
+            return channel;
+        }
+        catch (Exception e){
+            throw new ChannelNotFoundException();
+        }
 
-        VMChannel channel = channelService.getChannel(id, maxVideos, maxComments);
-        restTemplate.postForObject(
-                videoMinerUrl + "/api/v1/channels",
-                channel,
-                VMChannel.class);
-        return channel;
     }
 }
