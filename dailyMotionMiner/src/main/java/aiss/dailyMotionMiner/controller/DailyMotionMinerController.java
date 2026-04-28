@@ -14,11 +14,11 @@ public class DailyMotionMinerController {
 
     @PostMapping("/{id}")
     public VMChannel fetchAndSendChannel(
-            @PathVariable String channelId,
+            @PathVariable String id,
             @RequestParam(defaultValue = "10") int maxVideos,
             @RequestParam(defaultValue = "2") int maxPages) {
     
-        return dailyMotionService.getChannelAndSendToVideoMiner(channelId, maxVideos, maxPages);
+        return dailyMotionService.getChannelAndSendToVideoMiner(id, maxVideos, maxPages);
 }
     @GetMapping("/{id}")
     public VMChannel getChannel(

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("/api/v1/peertube")
+@RequestMapping("/api/peertube")
 public class ChannelController {
 
     @Autowired
