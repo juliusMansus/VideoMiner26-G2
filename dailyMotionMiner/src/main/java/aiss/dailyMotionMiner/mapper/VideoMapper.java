@@ -22,7 +22,7 @@ public class VideoMapper {
         newVideo.setCaptions(captions);
         List<VMComment> comments=new ArrayList<>();
         for(int i=0;i<video.getTags().size();i++){
-            comments.add(CommentMapper.toVMComment(video.getTags().get(i)));
+            comments.add(CommentMapper.toVMComment(video.getTags().get(i), video));
         }
         newVideo.setComments(comments);
         return newVideo;
