@@ -12,6 +12,7 @@ public class DailyMotionMinerController {
     @Autowired
     DailyMotionService dailyMotionService;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{id}")
     public VMChannel fetchAndSendChannel(
             @PathVariable String id,

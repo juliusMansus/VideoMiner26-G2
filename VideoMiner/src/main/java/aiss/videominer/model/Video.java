@@ -47,9 +47,9 @@ public class Video {
         this.name=name;
         this.description=description;
         this.releaseTime=releaseTime;
-        this.author=new User();
-        this.comments=new ArrayList<>();
-        this.captions=new ArrayList<>();
+        this.author = author != null ? author : new User();
+        this.comments = comments != null ? comments : new ArrayList<>(); 
+        this.captions = captions != null ? captions : new ArrayList<>();
     }
 
     public long getId() {

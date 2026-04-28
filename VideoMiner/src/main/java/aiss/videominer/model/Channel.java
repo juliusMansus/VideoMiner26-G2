@@ -42,7 +42,7 @@ public class Channel {
         this.name=name;
         this.description=description;
         this.createdTime=createdTime;
-        this.videos=new ArrayList<>();
+        this.videos = videos != null ? videos : new ArrayList<>();    
     }
     public long getId() {
         return id;
