@@ -26,14 +26,31 @@ public class VideoService {
     private String baseUrl;
 
     public List<VMVideo> getVideos(String channelHandle, int maxVideos, int maxComments){
-        VideoList videoList = restTemplate.getForObject(
-                baseUrl + "/video-channels/" + channelHandle + "/videos?count=" + maxVideos, VideoList.class);
         List<VMVideo> videos = new ArrayList<>();
-        if(videoList != null && videoList.getData() != null) {
-            for(Video video : videoList.getData()) {
+        int currentStart = 0;
+        int limitPerPage = Math.min(maxVideos, 100);        // limit for getting videos from Peertube is 100 per request
+
+        while(videos.size() < maxVideos) {
+            int videosRemaining = maxVideos - videos.size();
+            int count = Math.min(videosRemaining, limitPerPage);    // use the minimal required number of videos
+
+            VideoList videoList = restTemplate.getForObject(
+                    baseUrl + "/video-channels/" + channelHandle + "/videos?count=" + count + "&start=" + currentStart, VideoList.class);
+
+
+            if (videoList == null || videoList.getData() == null){ break; }
+
+            for (Video video : videoList.getData()) {
                 videos.add(VideoMapper.toVMVideo(video,
-                        commentService.getComments(video.getUuid(),maxComments),
+                        commentService.getComments(video.getUuid(), maxComments),
                         captionService.getCaptions(video.getUuid())));
+            }
+
+            currentStart += videoList.getData().size();
+
+            // break if there are no more videos
+            if (videoList.getData().size() < count) {
+                break;
             }
         }
         return videos ;

@@ -23,7 +23,7 @@ public class CommentService {
 
     public List<VMComment> getComments(String videoId, int maxComments) {
         CommentList commentList = restTemplate.getForObject(
-                baseUrl + "/videos/"+videoId+ "/comment-threads?count=" + maxComments, CommentList.class);
+                baseUrl + "/videos/"+videoId+ "/comment-threads?count=" + Math.min(maxComments, 100), CommentList.class);
         List<VMComment> comments = new ArrayList<>();
         if(commentList != null && commentList.getData() != null) {
             for (Comment comment : commentList.getData()) {
