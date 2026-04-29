@@ -1,6 +1,6 @@
 package aiss.videominer.model;
 
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -16,39 +16,36 @@ import java.util.List;
 public class Channel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @JsonProperty("id")
+    private String id;
 
-    @Column(name="name")
+    @JsonProperty("name")
     @NotEmpty(message = "Channel name cannot be empty")
     private String name;
 
-    @Column(name="description", columnDefinition="TEXT")
+    @JsonProperty("description")
+    @Column(columnDefinition="TEXT")
     private String description;
 
-    @Column(name="createdTime")
+    @JsonProperty("createdTime")
     @NotEmpty(message = "Channel creation time cannot be empty")
     private String createdTime;
 
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonProperty("videos")
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "channelId")
     @NotNull(message = "Channel videos cannot be null")
     private List<Video> videos;
-    public Channel(){}
 
-
-    public Channel(String name, String description, String createdTime, List<Video> videos){
-        this.name=name;
-        this.description=description;
-        this.createdTime=createdTime;
-        this.videos = videos != null ? videos : new ArrayList<>();    
+    public Channel() {
+        this.videos = new ArrayList<>();
     }
-    public long getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

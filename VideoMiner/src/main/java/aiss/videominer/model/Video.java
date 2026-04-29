@@ -1,9 +1,9 @@
 package aiss.videominer.model;
 
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,47 +16,50 @@ import java.util.List;
 public class Video {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @JsonProperty("id")
+    private String id;
 
-    @Column(name="name")
+    @JsonProperty("name")
     @NotEmpty(message = "Video name cannot be empty")
     private String name;
 
-    @Column(name="description", columnDefinition="TEXT")
+    @JsonProperty("description")
+    @Column(columnDefinition="TEXT")
     private String description;
 
-    @Column(name="releaseTime")
+    @JsonProperty("releaseTime")
     @NotEmpty(message = "Video release time cannot be empty")
     private String releaseTime;
 
+    @JsonProperty("user")
     @OneToOne(cascade = CascadeType.ALL)
     private User author;
 
-    @Column(name="comments")
+    @JsonProperty("comments")
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "videoId")
     private List<Comment> comments;
 
-    @Column(name="captions")
+    @JsonProperty("captions")
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "videoId")
     private List<Caption> captions;
 
-    public Video(String name, String description, String releaseTime, User author, List<Comment> comments, List<Caption> captions){
+    public Video(String id, String name, String description, String releaseTime, User author, List<Comment> comments, List<Caption> captions){
+        this.id=id;
         this.name=name;
         this.description=description;
         this.releaseTime=releaseTime;
         this.author = author != null ? author : new User();
-        this.comments = comments != null ? comments : new ArrayList<>(); 
+        this.comments = comments != null ? comments : new ArrayList<>();
         this.captions = captions != null ? captions : new ArrayList<>();
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -91,7 +94,7 @@ public class Video {
     public void setAuthor(User author) {
         this.author = author;
     }
-    
+
     public List<Comment> getComments() {
         return comments;
     }

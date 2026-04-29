@@ -20,7 +20,7 @@ public class VideoController {
     public List<Video> findAll(){return videoRepo.findAll();}
 
     @GetMapping("/{id}")
-    public Video findOneById(@PathVariable long id){
+    public Video findOneById(@PathVariable String id){
         Optional<Video> video=videoRepo.findById(id);
         if (!video.isPresent()) {
             throw new VideoNotFoundException();
