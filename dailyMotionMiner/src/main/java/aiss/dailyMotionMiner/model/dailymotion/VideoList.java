@@ -7,7 +7,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VideoList {
-    @JsonProperty("hasMore")
+    @JsonProperty("has_more")
     private boolean hasMore;
 
     @JsonProperty("list")

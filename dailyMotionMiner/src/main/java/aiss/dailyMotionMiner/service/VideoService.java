@@ -33,7 +33,7 @@ public class VideoService {
 
         while (currentPage <= maxPages && hasMore) {
             VideoList videoList = restTemplate.getForObject(
-                    baseUrl + "/user/" + id + "/videos?fields=" + fields + "&limit=" + maxVideos + "&page=" + currentPage, VideoList.class);
+                    baseUrl + "/user/" + id + "/videos?fields=" + fields + "&limit=" + Math.min(maxVideos, 100) + "&page=" + currentPage, VideoList.class);
 
             if (videoList != null && videoList.getData() != null) {
                 for (Video video : videoList.getData()) {
@@ -43,7 +43,7 @@ public class VideoService {
                     videos.add(VideoMapper.toVMVideo(video,
                             captionService.getCaptions(video.getId())));
                 }
-                hasMore = videoList.getHasMore() != null && videoList.getHasMore() : false;
+                hasMore = videoList.getHasMore();
                 
                 if (videos.size() >= maxVideos) {
                         break;
