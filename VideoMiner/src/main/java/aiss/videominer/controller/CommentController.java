@@ -33,7 +33,7 @@ public class CommentController {
     @GetMapping("/{id}")
     public Comment findOne(@PathVariable String id) throws CommentNotFoundException {
         Optional<Comment> comment = commentRepo.findById(id);
-        if (comment.isEmpty()) {
+        if (!comment.isPresent()) {
             throw new CommentNotFoundException();
         }
         return comment.get();
@@ -42,7 +42,7 @@ public class CommentController {
     @GetMapping("/video/{videoId}")
     public List<Comment> findByVideoId(@PathVariable String videoId) throws VideoNotFoundException {
         Optional<Video> video = videoRepo.findById(videoId);
-        if (video.isEmpty()) {
+        if (!video.isPresent()) {
             throw new VideoNotFoundException();
         }
         return video.get().getComments();

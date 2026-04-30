@@ -35,7 +35,7 @@ public class CaptionController {
     @GetMapping("/{id}")
     public Caption findOne(@PathVariable String id) throws CaptionNotFoundException {
         Optional<Caption> caption = captionRepo.findById(id);
-        if (caption.isEmpty()) {
+        if (!caption.isPresent()) {
             throw new CaptionNotFoundException();
         }
         return caption.get();
@@ -45,7 +45,7 @@ public class CaptionController {
     @GetMapping("/video/{videoId}")
     public List<Caption> findByVideoId(@PathVariable String videoId) throws VideoNotFoundException {
         Optional<Video> video = videoRepo.findById(videoId);
-        if (video.isEmpty()) {
+        if (!video.isPresent()) {
             throw new VideoNotFoundException();
         }
         return video.get().getCaptions();
