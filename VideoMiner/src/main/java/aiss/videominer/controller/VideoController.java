@@ -1,5 +1,6 @@
 package aiss.videominer.controller;
 
+import aiss.videominer.Exception.VideoNotFoundException;
 import aiss.videominer.model.Video;
 import aiss.videominer.repository.VideoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,9 @@ public class VideoController {
     public List<Video> findAll(){return videoRepo.findAll();}
 
     @GetMapping("/{id}")
-    public Video findOneById(@PathVariable String id){
+    public Video findOneById(@PathVariable String id) throws VideoNotFoundException {
         Optional<Video> video=videoRepo.findById(id);
-        if (!video.isPresent()) {
+        if (video.isEmpty()) {
             throw new VideoNotFoundException();
         }
         return video.get();

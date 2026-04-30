@@ -1,5 +1,6 @@
 package aiss.videominer.controller;
 
+import aiss.videominer.Exception.ChannelNotFoundException;
 import aiss.videominer.model.Channel;
 import aiss.videominer.repository.ChannelRepo;
 import jakarta.validation.Valid;
@@ -25,9 +26,9 @@ public class ChannelController {
     }
 
     @GetMapping("/{id}")
-    public Channel findOne(@PathVariable String id){
+    public Channel findOne(@PathVariable String id) throws ChannelNotFoundException {
         Optional<Channel> channel=channelRepo.findById(id);
-        if (!channel.isPresent()) {
+        if (channel.isEmpty()) {
             throw new ChannelNotFoundException();
         }
         return channel.get();
@@ -41,9 +42,9 @@ public class ChannelController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody Channel upChannel, @PathVariable String id){
+    public void update(@Valid @RequestBody Channel upChannel, @PathVariable String id) throws ChannelNotFoundException {
         Optional<Channel> channelData=channelRepo.findById(id);
-        if (!channelData.isPresent()) {
+        if (channelData.isEmpty()) {
             throw new ChannelNotFoundException();
         }
         Channel _channel=channelData.get();
