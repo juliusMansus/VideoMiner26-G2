@@ -22,6 +22,8 @@ public class Comment {
     @JsonProperty("createdOn")
     private String createdOn;
 
+    public Comment() {}
+
     public String getId() {
         return id;
     }

@@ -24,7 +24,7 @@ public class DailyMotionService {
     public VMChannel getChannelAndSendToVideoMiner(String id, Integer maxVideos, Integer maxPages) {
         VMChannel channel = channelService.getChannel(id, maxVideos, maxPages);
         restTemplate.postForObject(
-                videoMinerUrl + "/api/v1/channels",
+                videoMinerUrl + "/api/channels",
                 channel,
                 VMChannel.class);
         return channel;

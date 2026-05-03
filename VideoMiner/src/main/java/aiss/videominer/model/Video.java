@@ -55,6 +55,11 @@ public class Video {
         this.captions = captions != null ? captions : new ArrayList<>();
     }
 
+    public Video() {
+        this.comments = new ArrayList<>();
+        this.captions = new ArrayList<>();
+    }
+
     public String getId() {
         return id;
     }

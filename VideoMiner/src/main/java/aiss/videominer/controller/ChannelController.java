@@ -14,7 +14,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("api/channels")
+@RequestMapping("/api/channels")
 public class ChannelController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class ChannelController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Channel create(@Valid @RequestBody Channel channel) {
+    public Channel create(@RequestBody Channel channel) {
         return channelRepo.save(channel);
     }
 

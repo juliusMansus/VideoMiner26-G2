@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/videos")
+@RequestMapping("/api/videos")
 public class VideoController {
     @Autowired
     VideoRepo videoRepo;

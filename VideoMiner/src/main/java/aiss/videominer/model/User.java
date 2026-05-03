@@ -24,6 +24,8 @@ public class User {
     @JsonProperty("picture_link")
     private String picture_link;
 
+    public User() {}
+
     public Long getId() {
         return id;
     }

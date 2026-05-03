@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/dailyMotion")
+@RequestMapping("/api/dailymotion")
 public class DailyMotionMinerController {
 
     @Autowired
@@ -21,6 +21,7 @@ public class DailyMotionMinerController {
             @RequestParam(defaultValue = "10") int maxVideos,
             @RequestParam(defaultValue = "2") int maxPages) throws ChannelNotFoundException {
     try {
+
         return dailyMotionService.getChannelAndSendToVideoMiner(id, maxVideos, maxPages);
     } catch (Exception e) {
         throw new ChannelNotFoundException();
