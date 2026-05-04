@@ -1,0 +1,59 @@
+package aiss.dailymotionminer.service;
+
+
+import aiss.dailymotionminer.mapper.VideoMapper;
+import aiss.dailymotionminer.model.dailymotion.Video;
+import aiss.dailymotionminer.model.dailymotion.VideoList;
+import aiss.dailymotionminer.model.videominer.VMVideo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class VideoService {
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    @Autowired
+    CaptionService captionService;
+
+    @Value("${dailymotion.baseurl}")
+    private String baseUrl;
+
+    public List<VMVideo> getVideos(String id, int maxVideos, int maxPages){
+        String fields = "id,title,description,created_time,owner.id,owner.screenname,owner.url,owner.avatar_25_url,tags";
+        List<VMVideo> videos = new ArrayList<>();
+        int currentPage = 1;
+        boolean hasMore = true;
+
+        while (currentPage <= maxPages && hasMore) {
+            VideoList videoList = restTemplate.getForObject(
+                    baseUrl + "/user/" + id + "/videos?fields=" + fields + "&limit=" + Math.min(maxVideos, 100) + "&page=" + currentPage, VideoList.class);
+
+            if (videoList != null && videoList.getData() != null) {
+                for (Video video : videoList.getData()) {
+                    if (videos.size() >= maxVideos) {
+                        break;
+                    }
+                    videos.add(VideoMapper.toVMVideo(video,
+                            captionService.getCaptions(video.getId())));
+                }
+                hasMore = videoList.getHasMore();
+                
+                if (videos.size() >= maxVideos) {
+                        break;
+                    }
+            }
+            else {
+                hasMore = false;
+            }
+            currentPage++;
+        }
+        return videos;
+    }
+}
