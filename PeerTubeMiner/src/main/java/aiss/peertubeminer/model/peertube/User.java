@@ -23,4 +23,20 @@ public class User {
     public String getDisplayName() { return displayName; }
     public String getUrl() { return url; }
     public List<Avatar> getAvatars() { return avatars; }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setAvatars(List<Avatar> avatars) {
+        this.avatars = avatars;
+    }
 }

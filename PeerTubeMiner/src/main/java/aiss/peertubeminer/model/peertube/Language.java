@@ -14,6 +14,10 @@ public class Language {
     public String getId() { return id; }
     public String getLabel() { return label; }
 
+    public void setId(String id) { this.id = id; }
+
+    public void setLabel(String label) { this.label = label; }
+
     @Override
     public String toString() {
         return "Language{" +
