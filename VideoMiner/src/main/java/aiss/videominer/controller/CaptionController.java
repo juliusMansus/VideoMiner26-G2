@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Tag(name = "Caption", description = "API para gestionar los subtítulos")
 @RestController
-@RequestMapping("/api/captions")
+@RequestMapping("/videominer/captions")
 public class CaptionController {
 
     @Autowired
