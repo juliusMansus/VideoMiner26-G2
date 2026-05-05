@@ -18,14 +18,13 @@ public class VideoService {
 
     @Autowired
     RestTemplate restTemplate;
-
     @Autowired
     CaptionService captionService;
 
     @Value("${dailymotion.baseurl}")
     private String baseUrl;
 
-    public List<VMVideo> getVideos(String id, int maxVideos, int maxPages){
+    public List<VMVideo> getVideos(String id, int maxVideos, int maxPages) {
         String fields = "id,title,description,created_time,owner.id,owner.screenname,owner.url,owner.avatar_25_url,tags";
         List<VMVideo> videos = new ArrayList<>();
         int currentPage = 1;
@@ -37,17 +36,12 @@ public class VideoService {
 
             if (videoList != null && videoList.getData() != null) {
                 for (Video video : videoList.getData()) {
-                    if (videos.size() >= maxVideos) {
-                        break;
-                    }
+                    if (videos.size() >= maxVideos) { break; }
                     videos.add(VideoMapper.toVMVideo(video,
                             captionService.getCaptions(video.getId())));
                 }
                 hasMore = videoList.getHasMore();
-                
-                if (videos.size() >= maxVideos) {
-                        break;
-                    }
+                if (videos.size() >= maxVideos) { break; }
             }
             else {
                 hasMore = false;

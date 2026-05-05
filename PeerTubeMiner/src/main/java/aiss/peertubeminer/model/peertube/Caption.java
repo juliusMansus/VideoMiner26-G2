@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Caption {
 
-    //I USED captionPath as ID since caption has no ID in the response
+    // captionPath as ID since caption has no ID in the response
     @JsonProperty("captionPath")
     private String captionPath;
 

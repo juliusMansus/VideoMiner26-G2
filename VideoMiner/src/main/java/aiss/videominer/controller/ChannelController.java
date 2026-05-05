@@ -27,8 +27,8 @@ public class ChannelController {
 
     @GetMapping("/{id}")
     public Channel findOne(@PathVariable String id) throws ChannelNotFoundException {
-        Optional<Channel> channel=channelRepo.findById(id);
-        if (!channel.isPresent()) {
+        Optional<Channel> channel = channelRepo.findById(id);
+        if (channel.isEmpty()) {
             throw new ChannelNotFoundException();
         }
         return channel.get();
@@ -43,11 +43,11 @@ public class ChannelController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     public void update(@Valid @RequestBody Channel upChannel, @PathVariable String id) throws ChannelNotFoundException {
-        Optional<Channel> channelData=channelRepo.findById(id);
-        if (!channelData.isPresent()) {
+        Optional<Channel> channelData = channelRepo.findById(id);
+        if (channelData.isEmpty()) {
             throw new ChannelNotFoundException();
         }
-        Channel _channel=channelData.get();
+        Channel _channel = channelData.get();
         _channel.setName(upChannel.getName());
         _channel.setDescription(upChannel.getDescription());
         _channel.setCreatedTime(upChannel.getCreatedTime());

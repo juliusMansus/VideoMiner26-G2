@@ -8,6 +8,7 @@ import aiss.peertubeminer.model.videominer.VMVideo;
 import java.util.List;
 
 public class VideoMapper {
+
     public static VMVideo toVMVideo(Video ptVideo, List<VMComment> comments, List<VMCaption> captions) {
         VMVideo video = new VMVideo();
         video.setId(ptVideo.getUuid());
@@ -20,4 +21,5 @@ public class VideoMapper {
         video.setCaptions(captions);
         return video;
     }
+
 }

@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class DailyMotionService {
+
     @Autowired
     RestTemplate restTemplate;
 

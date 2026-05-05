@@ -7,6 +7,7 @@ import aiss.peertubeminer.model.videominer.VMVideo;
 import java.util.List;
 
 public class ChannelMapper {
+
     public static VMChannel toVMChannel(Channel ptChannel, List<VMVideo> videos) {
         VMChannel channel = new VMChannel();
         channel.setId(String.valueOf(ptChannel.getId()));
@@ -16,4 +17,5 @@ public class ChannelMapper {
         channel.setVideos(videos);
         return channel;
     }
+
 }

@@ -105,6 +105,7 @@ public class Video {
 
     public void setTags(List<String> tags) { this.tags = tags; }
 
+
     public User getOwner() {
         if (ownerId == null && ownerScreenname == null) { return null; }
         User user = new User();
@@ -114,5 +115,6 @@ public class Video {
         user.setAvatar25Url(this.ownerAvatar);
         return user;
     }
+
 }
 

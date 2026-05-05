@@ -55,6 +55,6 @@ public class ChannelController {
         catch (Exception e){
             throw new ChannelNotFoundException();
         }
-
     }
+
 }

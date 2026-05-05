@@ -4,6 +4,7 @@ import aiss.peertubeminer.model.peertube.Comment;
 import aiss.peertubeminer.model.videominer.VMComment;
 
 public class CommentMapper {
+
     public static VMComment toVMComment(Comment ptComment) {
         VMComment comment = new VMComment();
         comment.setId(String.valueOf(ptComment.getId()));
@@ -11,4 +12,5 @@ public class CommentMapper {
         comment.setCreatedOn(ptComment.getCreatedAt());
         return comment;
     }
+
 }

@@ -4,6 +4,7 @@ import aiss.peertubeminer.model.peertube.Caption;
 import aiss.peertubeminer.model.videominer.VMCaption;
 
 public class CaptionMapper {
+
     public static VMCaption toVMCaption(Caption caption) {
         VMCaption newCaption = new VMCaption();
         newCaption.setId(caption.getCaptionPath());
@@ -12,4 +13,5 @@ public class CaptionMapper {
             newCaption.setLanguage(caption.getLanguage().getId());
         return newCaption;
     }
+
 }

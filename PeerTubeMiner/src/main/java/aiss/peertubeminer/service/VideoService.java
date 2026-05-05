@@ -25,18 +25,19 @@ public class VideoService {
     @Value("${peertube.baseurl}")
     private String baseUrl;
 
-    public List<VMVideo> getVideos(String channelHandle, int maxVideos, int maxComments){
+    public List<VMVideo> getVideos(String channelHandle, int maxVideos, int maxComments) {
         List<VMVideo> videos = new ArrayList<>();
         int currentStart = 0;
-        int limitPerPage = Math.min(maxVideos, 100);        // limit for getting videos from Peertube is 100 per request
+        int limitPerPage = Math.min(maxVideos, 100);    // limit for getting videos from Peertube is 100 per request
 
         while(videos.size() < maxVideos) {
             int videosRemaining = maxVideos - videos.size();
             int count = Math.min(videosRemaining, limitPerPage);    // use the minimal required number of videos
 
             VideoList videoList = restTemplate.getForObject(
-                    baseUrl + "/video-channels/" + channelHandle + "/videos?count=" + count + "&start=" + currentStart, VideoList.class);
-
+                    baseUrl + "/video-channels/" + channelHandle + "/videos?count="
+                            + count + "&start=" + currentStart,
+                    VideoList.class);
 
             if (videoList == null || videoList.getData() == null){ break; }
 
@@ -47,12 +48,10 @@ public class VideoService {
             }
 
             currentStart += videoList.getData().size();
-
             // break if there are no more videos
-            if (videoList.getData().size() < count) {
-                break;
-            }
+            if (videoList.getData().size() < count) { break; }
         }
-        return videos ;
+        return videos;
     }
+
 }

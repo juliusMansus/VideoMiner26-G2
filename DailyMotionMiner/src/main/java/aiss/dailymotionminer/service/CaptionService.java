@@ -14,6 +14,7 @@ import java.util.List;
 
 @Service
 public class CaptionService {
+
     @Autowired
     RestTemplate restTemplate;
 
@@ -24,6 +25,7 @@ public class CaptionService {
         SubtitleList subtitleList = restTemplate.getForObject(
                 baseUrl+"/video/"+ videoId + "/subtitles", SubtitleList.class);
         List<VMCaption> captions = new ArrayList<>();
+
         if(subtitleList != null && subtitleList.getData() != null){
             for(Subtitle subtitle : subtitleList.getData()){
                 captions.add(CaptionMapper.toVMCaption(subtitle));
