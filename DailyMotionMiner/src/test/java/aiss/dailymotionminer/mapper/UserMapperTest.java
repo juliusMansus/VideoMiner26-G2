@@ -8,22 +8,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest()
+@SpringBootTest
 class UserMapperTest {
 
     @Test
     @DisplayName("Should map DailyMotion User to VMUser when avatar URL is present")
     void toVMUserWithAvatarUrl() {
-        // Arrange: Create real DailyMotion User object
         User dmUser = new User();
         dmUser.setScreenname("DailyMotion Creator");
         dmUser.setUrl("https://dailymotion.com/creator");
         dmUser.setAvatar25Url("https://dailymotion.com/thumb.jpg");
 
-        // Act
         VMUser result = UserMapper.toVMUser(dmUser);
 
-        // Assert
         assertNotNull(result);
         assertEquals(dmUser.getScreenname(), result.getName());
         assertEquals(dmUser.getUrl(), result.getUser_link());

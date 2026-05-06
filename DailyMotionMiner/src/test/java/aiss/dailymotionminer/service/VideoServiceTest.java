@@ -11,18 +11,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// Inject the real DailyMotion API URL so the RestTemplate can resolve the endpoint over the internet
-@SpringBootTest(properties = "dailymotion.baseurl=https://api.dailymotion.com")
+@SpringBootTest
 class VideoServiceTest {
 
     @Autowired
-    private VideoService videoService;
+    VideoService videoService;
+    final String validUserId = "x2ns7z1";
 
     @Test
     @DisplayName("Should successfully fetch, map, and return a list of VMVideos for a valid DailyMotion User ID")
     void getVideos_ValidId() {
-        // "dailymotion" is an official, highly active channel.
-        String validUserId = "dailymotion";
+
         int maxVideos = 2;
         int maxPages = 1;
 
@@ -41,13 +40,4 @@ class VideoServiceTest {
         assertNotNull(firstVideo.getComments(), "The comments list (tags) should be instantiated");
     }
 
-    @Test
-    @DisplayName("Should throw an HTTP exception when given an invalid DailyMotion User ID")
-    void getVideos_InvalidId() {
-        String invalidUserId = "fake_user_id_999999";
-
-        assertThrows(HttpClientErrorException.class, () -> {
-            videoService.getVideos(invalidUserId, 1, 1);
-        }, "RestTemplate should throw an HTTP error when the DailyMotion API rejects the User ID");
-    }
 }

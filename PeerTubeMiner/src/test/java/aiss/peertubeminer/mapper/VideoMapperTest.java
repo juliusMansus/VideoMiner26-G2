@@ -55,7 +55,6 @@ class VideoMapperTest {
         User realAccount = new User();
         realAccount.setDisplayName("JohnDoe");
         realAccount.setUrl("https://peertube.local/users/johndoe");
-        // 2. Create the Video and assign the account
         Video realVideo = new Video();
         realVideo.setUuid("550e8400-e29b-41d4-a716-446655440000");
         realVideo.setName("My Awesome Video");

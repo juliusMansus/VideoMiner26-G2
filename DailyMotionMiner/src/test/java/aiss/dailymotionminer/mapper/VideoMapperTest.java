@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(properties = "videominer.url=http://localhost:8080")
+@SpringBootTest
 class VideoMapperTest {
 
     @Test

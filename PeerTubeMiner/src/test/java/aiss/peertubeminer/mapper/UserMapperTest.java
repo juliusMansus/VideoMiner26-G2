@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserMapperTest {
 
     @Test
-    @DisplayName("Should map correctly when user has an avatar list with elements (True condition)")
+    @DisplayName("Should map correctly when user has an avatar list with elements")
     void toVMUser_WithAvatars() {
         Avatar realAvatar = new Avatar();
         realAvatar.setFileUrl("https://peertube.local/images/avatar.jpg");

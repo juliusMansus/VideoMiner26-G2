@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CaptionMapperTest {
 
     @Test
-    @DisplayName("Should map correctly when Language is present (True condition)")
+    @DisplayName("Should map correctly when Language is present")
     void toVMCaption_WithLanguage() {
 
         Language realLanguage = new Language();
@@ -32,7 +32,7 @@ class CaptionMapperTest {
     }
 
     @Test
-    @DisplayName("Should map correctly when Language is null (False condition)")
+    @DisplayName("Should map correctly when Language is null")
     void toVMCaption_WithoutLanguage() {
         Caption realCaption = new Caption();
         realCaption.setCaptionPath("/captions/unknown.vtt");
