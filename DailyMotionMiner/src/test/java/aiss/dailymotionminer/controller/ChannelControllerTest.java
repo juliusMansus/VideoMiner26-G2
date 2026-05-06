@@ -10,17 +10,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class DailyMotionMinerControllerTest {
+class ChannelControllerTest {
 
     @Autowired
-    DailyMotionMinerController dailyMotionMinerController;
+    ChannelController channelController;
 
     @Test
     @DisplayName("getChannel should return a VMChannel when given a valid DailyMotion ID")
     void getChannel_Success() throws ChannelNotFoundException {
         String validChannelId = "x6n9ve";
 
-        VMChannel result = dailyMotionMinerController.getChannel(validChannelId, 10, 2);
+        VMChannel result = channelController.getChannel(validChannelId, 10, 2);
 
         assertNotNull(result, "The returned channel should not be null");
         assertEquals(validChannelId, result.getId(), "The returned channel ID should match the request");
@@ -31,7 +31,7 @@ class DailyMotionMinerControllerTest {
     void getChannel_NotFound() {
         String invalidId = "THIS_ID_IS_TOTALLY_INVALID_12345";
         assertThrows(ChannelNotFoundException.class, () -> {
-            dailyMotionMinerController.getChannel(invalidId, 10, 2);
+            channelController.getChannel(invalidId, 10, 2);
         }, "An invalid ID should trigger a ChannelNotFoundException");
     }
 
@@ -39,7 +39,7 @@ class DailyMotionMinerControllerTest {
     @DisplayName("fetchAndSendChannel should return VMChannel on valid ID and successful POST")
     void fetchAndSendChannel_Success() throws ChannelNotFoundException {
         String validChannelId = "x6n9ve";
-        VMChannel result = dailyMotionMinerController.fetchAndSendChannel(validChannelId, 10, 2);
+        VMChannel result = channelController.fetchAndSendChannel(validChannelId, 10, 2);
         assertNotNull(result, "The channel should be returned after being sent to VideoMiner");
     }
 
@@ -48,7 +48,7 @@ class DailyMotionMinerControllerTest {
     void fetchAndSendChannel_NotFound() {
         String invalidId = "NON_EXISTENT_ID_999";
         assertThrows(ChannelNotFoundException.class, () -> {
-            dailyMotionMinerController.fetchAndSendChannel(invalidId, 10, 2);
+            channelController.fetchAndSendChannel(invalidId, 10, 2);
         }, "An invalid ID should trigger a ChannelNotFoundException during the fetch-and-send process");
     }
 }

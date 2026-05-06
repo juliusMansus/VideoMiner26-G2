@@ -2,17 +2,17 @@ package aiss.dailymotionminer.controller;
 
 import aiss.dailymotionminer.exception.ChannelNotFoundException;
 import aiss.dailymotionminer.model.videominer.VMChannel;
-import aiss.dailymotionminer.service.DailyMotionService;
+import aiss.dailymotionminer.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/dailymotion")
-public class DailyMotionMinerController {
+public class ChannelController {
 
     @Autowired
-    DailyMotionService dailyMotionService;
+    ChannelService channelService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{id}")
@@ -22,7 +22,7 @@ public class DailyMotionMinerController {
             @RequestParam(defaultValue = "2") int maxPages) throws ChannelNotFoundException {
     try {
 
-        return dailyMotionService.getChannelAndSendToVideoMiner(id, maxVideos, maxPages);
+        return channelService.getChannelAndSendToVideoMiner(id, maxVideos, maxPages);
     } catch (Exception e) {
         throw new ChannelNotFoundException();
     }
@@ -35,7 +35,7 @@ public class DailyMotionMinerController {
             @RequestParam(defaultValue = "2") int maxPages) throws ChannelNotFoundException {
 
         try {
-            return dailyMotionService.getChannel(id, maxVideos, maxPages);
+            return channelService.getChannel(id, maxVideos, maxPages);
         }
         catch (Exception e) {
             throw new ChannelNotFoundException();

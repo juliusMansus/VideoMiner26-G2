@@ -19,11 +19,22 @@ public class ChannelService {
 
     @Value("${dailymotion.baseurl}")
     private String baseUrl;
+    @Value("${videominer.url}")
+    private String videoMinerUrl;
 
     public VMChannel getChannel(String id, int maxVideos, int maxPages) {
         String fields = "id,screenname,url,avatar_25_url,description,created_time";
         User channel = restTemplate.getForObject(baseUrl + "/user/" + id + "?fields=" + fields, User.class);
         return ChannelMapper.toVMChannel(channel,videoService.getVideos(id, maxVideos, maxPages));
+    }
+
+    public VMChannel getChannelAndSendToVideoMiner(String id, Integer maxVideos, Integer maxPages) {
+        VMChannel channel = getChannel(id, maxVideos, maxPages);
+        restTemplate.postForObject(
+                videoMinerUrl + "/channels",
+                channel,
+                VMChannel.class);
+        return channel;
     }
 
 }
