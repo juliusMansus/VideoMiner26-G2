@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("/api/peertube")
+@RequestMapping("/peertube")
 public class ChannelController {
 
     @Autowired
@@ -47,7 +47,7 @@ public class ChannelController {
         try {
             VMChannel channel = channelService.getChannel(id, maxVideos, maxComments);
             restTemplate.postForObject(
-                    videoMinerUrl + "/api/channels",
+                    videoMinerUrl + "/channels",
                     channel,
                     VMChannel.class);
             return channel;

@@ -54,4 +54,13 @@ public class ChannelController {
         channelRepo.save(_channel);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable String id) throws ChannelNotFoundException {
+        if(!channelRepo.existsById(id)){
+            throw new ChannelNotFoundException();
+        }
+        channelRepo.deleteById(id);
+    }
+
 }

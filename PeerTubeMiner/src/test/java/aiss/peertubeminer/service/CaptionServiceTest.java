@@ -17,7 +17,7 @@ class CaptionServiceTest {
     CaptionService captionService;
 
     @Test
-    @DisplayName("GetCaptions of a video")
+    @DisplayName("Get Captions of a video")
     void getCaptions() {
         List<VMCaption> captions = captionService.getCaptions("udhki4GbH2NtTx6aGJB6Mr");
         assertFalse(captions.isEmpty(), "The Captions List is empty");
