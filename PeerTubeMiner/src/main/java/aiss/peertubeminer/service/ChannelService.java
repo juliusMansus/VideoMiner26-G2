@@ -18,9 +18,20 @@ public class ChannelService {
 
     @Value("${peertube.baseurl}")
     private String baseUrl;
+    @Value("${videominer.url}")
+    private String videoMinerUrl;
 
     public VMChannel getChannel(String channelHandle, int maxVideos, int maxComments) {
         Channel channel = restTemplate.getForObject(baseUrl + "/video-channels/" + channelHandle, Channel.class);
         return ChannelMapper.toVMChannel(channel,videoService.getVideos(channelHandle,maxVideos,maxComments));
+    }
+
+    public VMChannel getChannelAndSendToVideoMiner(String id, Integer maxVideos, Integer maxPages) {
+        VMChannel channel = getChannel(id, maxVideos, maxPages);
+        restTemplate.postForObject(
+                videoMinerUrl + "/channels",
+                channel,
+                VMChannel.class);
+        return channel;
     }
 }

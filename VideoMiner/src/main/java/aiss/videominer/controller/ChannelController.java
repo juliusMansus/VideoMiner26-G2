@@ -73,7 +73,9 @@ public class ChannelController {
             @ApiResponse(responseCode = "201", description = "Posted Channel object",
                     content = {@Content(
                             schema = @Schema(implementation = Channel.class),
-                            mediaType = "application/json")})
+                            mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", description = "Incorrect request format",
+                    content = {@Content(schema = @Schema())})
     })
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -87,6 +89,8 @@ public class ChannelController {
             tags = {"Channel", "PUT"})
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "No content",
+                    content = {@Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "400", description = "Incorrect request format",
                     content = {@Content(schema = @Schema())}),
             @ApiResponse(responseCode = "404", description = "Channel not found",
                     content = {@Content(schema = @Schema())})
@@ -110,6 +114,8 @@ public class ChannelController {
             tags = {"Channel", "DELETE"})
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "No content",
+                    content = {@Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "400", description = "Incorrect request format",
                     content = {@Content(schema = @Schema())}),
             @ApiResponse(responseCode = "404", description = "Channel not found",
                     content = {@Content(schema = @Schema())})
