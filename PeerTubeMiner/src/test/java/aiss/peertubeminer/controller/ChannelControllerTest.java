@@ -18,7 +18,7 @@ class ChannelControllerTest {
     @Test
     @DisplayName("getChannel should return VMChannel on valid real ID")
     void getChannel() throws ChannelNotFoundException {
-        String realChannelId = "1";
+        String realChannelId = "blender_open_movies@video.blender.org";
         VMChannel result = channelController.getChannel(realChannelId, 10, 2);
         assertNotNull(result, "Channel should not be null");
     }
@@ -26,7 +26,7 @@ class ChannelControllerTest {
     @Test
     @DisplayName("sendToVideoMiner should fetch and POST channel successfully")
     void sendToVideoMiner() throws ChannelNotFoundException {
-        String realChannelId = "1";
+        String realChannelId = "blender_open_movies@video.blender.org";
         VMChannel result = channelController.sendToVideoMiner(realChannelId, 10, 2);
         assertNotNull(result, "Channel should not be null after POSTing");
     }
