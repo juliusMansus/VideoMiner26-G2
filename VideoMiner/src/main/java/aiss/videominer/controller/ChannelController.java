@@ -29,7 +29,7 @@ public class ChannelController {
 
     @Operation(
             summary = "Retrieve a channels list",
-            description = "Get a list with all channels there are.",
+            description = "Get a list with all Channels objects there are.",
             tags = {"Channel", "GET"})
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "List of channels",

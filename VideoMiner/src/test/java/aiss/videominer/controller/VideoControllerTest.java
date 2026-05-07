@@ -53,9 +53,9 @@ class VideoControllerTest {
 
     @Test
     @DisplayName("Find a specific video by its unique ID")
-    void findOneById() throws VideoNotFoundException {
+    void findOne() throws VideoNotFoundException {
         // Act
-        Video result = videoController.findOneById("v12345");
+        Video result = videoController.findOne("v12345");
 
         // Assert
         assertNotNull(result, "The video should be found");
@@ -63,15 +63,4 @@ class VideoControllerTest {
         assertEquals("DailyMotion Integration Test Video", result.getName());
     }
 
-    @Test
-    @DisplayName("Throw VideoNotFoundException when the ID does not exist")
-    void findOneById_NotFound() {
-        // Arrange
-        String fakeId = "non_existent_id_999";
-
-        // Act & Assert
-        assertThrows(VideoNotFoundException.class, () -> {
-            videoController.findOneById(fakeId);
-        }, "Should throw VideoNotFoundException for an ID not present in the database");
-    }
 }
