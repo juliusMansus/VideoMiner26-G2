@@ -62,9 +62,9 @@ public class ChannelController {
     public VMChannel fetchAndSendChannel(
             @PathVariable String id,
             @RequestParam(defaultValue = "10") int maxVideos,
-            @RequestParam(defaultValue = "2") int maxPages) throws ChannelNotFoundException {
+            @RequestParam(defaultValue = "2") int maxComments) throws ChannelNotFoundException {
         try {
-            return channelService.getChannelAndSendToVideoMiner(id, maxVideos, maxPages);
+            return channelService.getChannelAndSendToVideoMiner(id, maxVideos, maxComments);
         }
         catch (Exception e) { throw new ChannelNotFoundException(); }
     }
