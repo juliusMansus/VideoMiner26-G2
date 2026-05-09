@@ -15,7 +15,9 @@ class ChannelControllerTest {
     @Autowired
     ChannelController channelController;
 
-    private final String validChannelId = "cabal_axz388";
+    private final String validChannelId = "x50q15c";
+
+
 
     @Test
     @DisplayName("getChannel should return a VMChannel when given a valid DailyMotion ID")
